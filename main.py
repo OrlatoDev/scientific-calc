@@ -1,17 +1,25 @@
+from pip import main
 from Calc import Calc
 
 from equations import Equations
 from units_converter import UnitsConverter
 from areas_and_volumes import AreasAndVolumes
 from percentage import Percentage
+from factorial import Factorial
+from binary import Binary
 
 c = Calc()
 
 main_options = [
-    "Equations", 
+    "Equations and Algebra", 
     "Units Converter",
     "Areas and Volumes",
     "Percentage", 
+    "Factorial",
+    "Binary Converter",
+    "GCD (Greatest Common Divisor)",
+    "LCM (Least Common Multiple)",
+    "Averages",
     "Quit"
 ]
 
@@ -28,10 +36,14 @@ while c.running:
         ]
 
         while fde.running:
-            fde.menu("Equations", options)
+            fde.menu("Equations and Algebra", options)
             response = fde.get_response(options)
 
             if response == 0:
+                print("\nTips: ")
+                print("1. for simple operations use the default symbols (+, -, *, /, =)")
+                print("2. for exponentiation use ** (to write 2² use 2**2)")
+                print("3. for rooting use sqrt() (to write √2 use sqrt(2))\n")
                 eq = str(input("Type your equation: "))
 
                 fde.print_success("Result(s): ")
@@ -171,7 +183,7 @@ while c.running:
 
         options = [
             "% from x value",
-            "how many % is x out of y",
+            "How many % is x out of y",
             "Quit"
         ]
 
@@ -192,3 +204,46 @@ while c.running:
 
                 pct.print_success("Result: " + str(pct.percent_x_out_of_y(x, y)))
                 pct.await_action()
+
+    elif main_response == 4:
+        fct = Factorial()
+
+        options = [
+            "Calc",
+            "Quit"
+        ]
+
+        while fct.running:
+            fct.menu("Factorial", options)
+            response = fct.get_response(options)
+
+            if response == 0:
+                x = int(input("x: "))
+
+                fct.print_success("Result: " + str(fct.factorial(x)))
+                fct.await_action()
+
+    elif main_response == 5:
+        binc = Binary()
+
+        options = [
+            "Binary to Decimal",
+            "Decimal to Binary",
+            "Quit"
+        ]
+
+        while binc.running:
+            binc.menu("Binary Converter", options)
+            response = binc.get_response(options)
+
+            if response == 0:
+                b = str(input("Binary: "))
+
+                binc.print_success("Result: " + str(binc.toDec(b)))
+                binc.await_action()
+
+            elif response == 1:
+                d = int(input("Decimal: "))
+
+                binc.print_success("Result: " + str(binc.toBinary(d)))
+                binc.await_action()
