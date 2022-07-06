@@ -1,14 +1,20 @@
 from Calc import Calc
-from lcm import LCM
 
 class GCD(Calc):
     def calc(self, *args):
         for i in args[0]: args[0][args[0].index(i)] = int(args[0][args[0].index(i)])
 
-        lcm = LCM()
+        def findgcd(x, y):
+            while(y):
+                x, y = y, x % y
+            
+            return x
 
-        p = 1
-        for i in args[0]:
-            p *= i
-        
-        return p / lcm.calc(args[0])
+        n1 = args[0][0]
+        n2 = args[0][1]
+
+        gcd = findgcd(n1, n2)
+        for i in range(2, len(args[0])):
+            gcd = findgcd(gcd, args[0][i])
+
+        return gcd
