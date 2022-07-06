@@ -1,4 +1,3 @@
-from pip import main
 from Calc import Calc
 
 from equations import Equations
@@ -7,6 +6,8 @@ from areas_and_volumes import AreasAndVolumes
 from percentage import Percentage
 from factorial import Factorial
 from binary import Binary
+from lcm import LCM
+from gcd import GCD
 
 c = Calc()
 
@@ -19,7 +20,6 @@ main_options = [
     "Binary Converter",
     "GCD (Greatest Common Divisor)",
     "LCM (Least Common Multiple)",
-    "Averages",
     "Quit"
 ]
 
@@ -247,3 +247,41 @@ while c.running:
 
                 binc.print_success("Result: " + str(binc.toBinary(d)))
                 binc.await_action()
+
+    elif main_response == 6:
+        gcd = GCD()
+
+        options = [
+            "Calc",
+            "Quit"
+        ]
+
+        while gcd.running:
+            gcd.menu("GCD", options)
+            response = gcd.get_response(options)
+
+            if response == 0:
+                ns = str(input("Numbers (split with comma): "))
+                ns = ns.split(", ")
+
+                gcd.print_success("Result: " + str(gcd.calc(ns)))
+                gcd.await_action()
+
+    elif main_response == 7:
+        lcm = LCM()
+
+        options = [
+            "Calc",
+            "Quit"
+        ]
+
+        while lcm.running:
+            lcm.menu("LCM", options)
+            response = lcm.get_response(options)
+
+            if response == 0:
+                ns = str(input("Numbers (split with comma): "))
+                ns = ns.split(", ")
+
+                lcm.print_success("Result: " + str(lcm.calc(ns)))
+                lcm.await_action()
